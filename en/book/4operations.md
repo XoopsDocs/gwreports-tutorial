@@ -1,6 +1,6 @@
 # 4.0 Operating Instructions
 
-## A Hands On Quick Start Guide
+### A Hands On Quick Start Guide
 For the impatient, we will offer some quick examples before going through a comprehensive review of gwreports features. For this guide, we will assume you have downloaded and installed the full gwreports module on a suitable test system. It installs just like any CMS module.
 
 ####A 2 minute introduction
