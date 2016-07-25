@@ -8,7 +8,7 @@
 * [The User Side](en/book/5userside.md)
 * [Blocks](en/book/6blocks.md)
 * [Templates](en/book/7templates.md)
-* [Security Considerations](book/8other.md)
+* [Concepts](book/8other.md)
 * [Module Credits](en/book/9credits.md)
 * [About XOOPS CMS](en/book/10aboutxoops.md)
 
