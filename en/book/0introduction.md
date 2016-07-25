@@ -1,2 +1,5 @@
 # Introduction
 
+gwreports is a MySQL reporting tool for ImpressCMS and XOOPS content management systems (CMS). 
+
+gwreports allows the CMS module administrator to enter SQL queries in such a way that they can be run by users in a controlled manner. The module administrator defines reports, which can consist of one or more SQL queries, known as sections. Access to a report is strictly controlled by the group permissions the module administrator assigns to it. A report can take parameters, such as a date range, if needed. The column output of a report section can be customized with a variety of formatting options. Reports can be organized into a menu system by topic, or accessed through system blocks. All of this is done without any programming required; only the creation of the SQL query is needed. 
