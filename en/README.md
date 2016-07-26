@@ -1,7 +1,7 @@
 ### _XOOPS Documentation Series_
 ![logoXoops.jpg](assets/logoXoops.jpg)
 
-# Module gwReports
+# gwReports Module
 #### for XOOPS 2.5.8
       
 ![logoModule.png](assets/logoModule.png)
