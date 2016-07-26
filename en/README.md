@@ -1,7 +1,7 @@
 ### _XOOPS Documentation Series_
 ![logoXoops.jpg](assets/logoXoops.jpg)
 
-# Module gwReports
+# gwReports Module
 #### for XOOPS 2.5.8
       
 ![logoModule.png](assets/logoModule.png)
@@ -12,7 +12,7 @@
 
 ## Module Purpose 
 
-This module is for .....
+**gwReports **is a MySQL reporting tool for XOOPS Content Management System (CMS).
 
 ![image001.png](assets/image001.png)
 *Figure 1: Main view of the gwReports Module (Admin side)*
