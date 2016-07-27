@@ -87,3 +87,4 @@ Is Active:  Yes
 ```
 Now go check out how the report functions from the user side. All of the editor functions are gone, and you have a report that looks, feels and functions like a part of your CMS.
 
+
