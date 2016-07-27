@@ -172,7 +172,7 @@ We need to use this last bit twice, once for v2.prcp, and again for v2.prcp\_adj
 
 **Got data, now what?**
 
-Populating the tables is just the first step, as the whole point of this exercise was to create a demo, not of precipitation data, but of gwreports. There were three main reports that were obvious: 
+Populating the tables is just the first step, as the whole point of this exercise was to create a demo, not of precipitation data, but of gwreports. There were three main reports that were obvious:
 
 * A list of Countries
 * A list of Stations in a Country
@@ -190,7 +190,8 @@ and country_name like '{cname}'
 group by c.country_name, s.country_code
 order by c.country_name
 ```
-Add a parameter definition for cname as Like Text and we have a report ready to run. We can move on to the Stations by Country list: 
+
+Add a parameter definition for _cname _as Like Text and we have a report ready to run. We can move on to the Stations by Country list:
 
 ```
 select station_code
@@ -206,9 +207,10 @@ from STATION
 where country_code = '{ccode}'
 order by station_name, station_code
 ```
-Note here we use the MySQL CASE construct to convert the coded elevation value of -999 (meaning the elevation is not available) into something more meaningful for humans.
 
-We can make this a bit fancier by adding another section with country information like this: 
+Note here we use the MySQL CASE construct to convert the coded elevation value of -999 \(meaning the elevation is not available\) into something more meaningful for humans.
+
+We can make this a bit fancier by adding another section with country information like this:
 
 ```
 SELECT country_name
@@ -220,78 +222,78 @@ and c.country_code = s.country_code
 group by country_name, country_code
 ```
 
-Make that section Multirow=No, and reorder the sections to put it on top. Define a ccode parameter (Text, length of 3) and we've got another one down. 
+Make that section Multirow=No, and reorder the sections to put it on top. Define a ccode parameter \(Text, length of 3\) and we've got another one down.
 
-The Precipitation listing has more CASE magic, and lots of repetition, but is fairly simple. We also convert the tenths of millimeters into millimeters, again for human readability: 
-```
-    select record_year
-    , CASE 
-    WHEN precip01 = -9999 THEN 'n/a' 
-    WHEN precip01 = -8888 THEN 'trace' 
-    ELSE round((precip01/10),1)
-    END as Jan
-    , CASE 
-    WHEN precip02 = -9999 THEN 'n/a' 
-    WHEN precip02 = -8888 THEN 'trace' 
-    ELSE round((precip02/10),1)
-    END as Feb
-    , CASE 
-    WHEN precip03 = -9999 THEN 'n/a' 
-    WHEN precip03 = -8888 THEN 'trace' 
-    ELSE round((precip03/10),1)
-    END as Mar
-    , CASE 
-    WHEN precip04 = -9999 THEN 'n/a' 
-    WHEN precip04 = -8888 THEN 'trace' 
-    ELSE round((precip04/10),1)
-    END as Apr
-    , CASE 
-    WHEN precip05 = -9999 THEN 'n/a' 
-    WHEN precip05 = -8888 THEN 'trace' 
-    ELSE round((precip05/10),1)
-    END as May
-    , CASE 
-    WHEN precip06 = -9999 THEN 'n/a' 
-    WHEN precip06 = -8888 THEN 'trace' 
-    ELSE round((precip06/10),1)
-    END as Jun
-    , CASE 
-    WHEN precip07 = -9999 THEN 'n/a' 
-    WHEN precip07 = -8888 THEN 'trace' 
-    ELSE round((precip07/10),1)
-    END as Jul
-    , CASE 
-    WHEN precip08 = -9999 THEN 'n/a' 
-    WHEN precip08 = -8888 THEN 'trace' 
-    ELSE round((precip08/10),1)
-    END as Aug
-    , CASE 
-    WHEN precip09 = -9999 THEN 'n/a' 
-    WHEN precip09 = -8888 THEN 'trace' 
-    ELSE round((precip09/10),1)
-    END as Sep
-    , CASE 
-    WHEN precip10 = -9999 THEN 'n/a' 
-    WHEN precip10 = -8888 THEN 'trace' 
-    ELSE round((precip10/10),1)
-    END as Oct
-    , CASE 
-    WHEN precip11 = -9999 THEN 'n/a' 
-    WHEN precip11 = -8888 THEN 'trace' 
-    ELSE round((precip11/10),1)
-    END as Nov
-    , CASE 
-    WHEN precip12 = -9999 THEN 'n/a' 
-    WHEN precip12 = -8888 THEN 'trace' 
-    ELSE round((precip12/10),1)
-    END as `Dec` 
-    , p.country_code
-    from PRECIP p, STATION s
-    where s.station_code = '{scode}'
-    and s.station_code = p.station_code
-    order by record_year
-```
-Of course we need a scode parameter, text, length of 11. And, just for fun, add a Station information section: 
+The Precipitation listing has more CASE magic, and lots of repetition, but is fairly simple. We also convert the tenths of millimeters into millimeters, again for human readability:
+
+        select record_year
+        , CASE 
+        WHEN precip01 = -9999 THEN 'n/a' 
+        WHEN precip01 = -8888 THEN 'trace' 
+        ELSE round((precip01/10),1)
+        END as Jan
+        , CASE 
+        WHEN precip02 = -9999 THEN 'n/a' 
+        WHEN precip02 = -8888 THEN 'trace' 
+        ELSE round((precip02/10),1)
+        END as Feb
+        , CASE 
+        WHEN precip03 = -9999 THEN 'n/a' 
+        WHEN precip03 = -8888 THEN 'trace' 
+        ELSE round((precip03/10),1)
+        END as Mar
+        , CASE 
+        WHEN precip04 = -9999 THEN 'n/a' 
+        WHEN precip04 = -8888 THEN 'trace' 
+        ELSE round((precip04/10),1)
+        END as Apr
+        , CASE 
+        WHEN precip05 = -9999 THEN 'n/a' 
+        WHEN precip05 = -8888 THEN 'trace' 
+        ELSE round((precip05/10),1)
+        END as May
+        , CASE 
+        WHEN precip06 = -9999 THEN 'n/a' 
+        WHEN precip06 = -8888 THEN 'trace' 
+        ELSE round((precip06/10),1)
+        END as Jun
+        , CASE 
+        WHEN precip07 = -9999 THEN 'n/a' 
+        WHEN precip07 = -8888 THEN 'trace' 
+        ELSE round((precip07/10),1)
+        END as Jul
+        , CASE 
+        WHEN precip08 = -9999 THEN 'n/a' 
+        WHEN precip08 = -8888 THEN 'trace' 
+        ELSE round((precip08/10),1)
+        END as Aug
+        , CASE 
+        WHEN precip09 = -9999 THEN 'n/a' 
+        WHEN precip09 = -8888 THEN 'trace' 
+        ELSE round((precip09/10),1)
+        END as Sep
+        , CASE 
+        WHEN precip10 = -9999 THEN 'n/a' 
+        WHEN precip10 = -8888 THEN 'trace' 
+        ELSE round((precip10/10),1)
+        END as Oct
+        , CASE 
+        WHEN precip11 = -9999 THEN 'n/a' 
+        WHEN precip11 = -8888 THEN 'trace' 
+        ELSE round((precip11/10),1)
+        END as Nov
+        , CASE 
+        WHEN precip12 = -9999 THEN 'n/a' 
+        WHEN precip12 = -8888 THEN 'trace' 
+        ELSE round((precip12/10),1)
+        END as `Dec` 
+        , p.country_code
+        from PRECIP p, STATION s
+        where s.station_code = '{scode}'
+        and s.station_code = p.station_code
+        order by record_year
+
+Of course we need a _scode _parameter, text, length of 11. And, just for fun, add a Station information section:
 
 ```
 select station_name
@@ -307,25 +309,28 @@ from STATION s, COUNTRY c
 where c.country_code = s.country_code
 and station_code = '{scode}'
 ```
-From Dumb Reports to a System
 
-The reports "work" at this point. You can look up a country code, plug that into the stations report to look up a station, plug that into the precipitation listing. Uggh! How about we go to the country list, click test, click on the country_name column header, and enter the following as the Extended format: 
+**From Dumb Reports to a System**
+
+The reports "work" at this point. You can look up a country code, plug that into the stations report to look up a station, plug that into the precipitation listing. Uggh! How about we go to the country list, click test, click on the country\_name column header, and enter the following as the Extended format:
 
 ```
 <a href="report_view.php?rid=2&ccode={country_code}">{country_name}</a>
 ```
-From Dumb Reports to a System
 
-The reports "work" at this point. You can look up a country code, plug that into the stations report to look up a station, plug that into the precipitation listing. Uggh! How about we go to the country list, click test, click on the country_name column header, and enter the following as the Extended format: 
+OK, we really needed to look up the report id to put after the rid= part, but that really is all there is to linking the country list to the station list. Repeat that concept on the stations listing, adding this to the station\_code column: 
 
 ```
 <a href="report_view.php?rid=3&scode={station_code}" title="View Station Records">{station_code}</a>
 ```
 
+Voila! No more memorizing or cutting and pasting. Just click through from one report to another. Now, ready for the kicker?
 
+**Elapsed Time**
 
+The time from setting out to find "big gobs of data" to having a system of three interlinked reports was one afternoon for one person.Yes, really. "Quick" was a requirement, remember? OK, there were several more tweaks to be made, and after a little bit of playing, a few more reports suggested themselves. There was more effort expended to polish the demo, test it under different circumstances, and find and fix a tiny bug in the process that gave everyone very dry Decembers. But building the proof of concept with live data fit between lunch and dinner. Time for pizza and beer!
 
+**Wrapping Up**
 
-
-
+Hopefully, when you put this write-up together with the [**manual**](http://geekwright.com/modules/gwreportsmanual/) and a little bit of quality experimentation time, you will be able to envision more practical uses for this power. The purpose behind [**gwreports**](https://sourceforge.net/projects/gwreports/) was to make data accessible, and we hope this [**demonstration**](http://geekwright.com/modules/gwreports/) proves success in that goal. 
 
