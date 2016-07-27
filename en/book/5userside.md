@@ -21,17 +21,17 @@ OK, it was a bit loose, but it was a plan.
 
 In this plan, these were the files of interest:
 
-v2.country.codes - countries and numerical country code
+* v2.country.codes - countries and numerical country code
 
-v2.prcp.inv - meta data describing observation stations
+* v2.prcp.inv - meta data describing observation stations
 
-v2.prcp - raw precipitation data
+* v2.prcp - raw precipitation data
 
-v2.prcp\_adj - adjusted precipitation data
+* v2.prcp_adj - adjusted precipitation data
 
 The v2.prcp.readme indicates the adjusted data file both eliminates some data points and adds some others. This lead to another design decision, merge these two sets for the demo.
 
-For reference, here are brief snippets from the three major files. \(v2.prcp and v2.prcp\_adj are identical in structure.\)
+For reference, here are brief snippets from the three major files. (v2.prcp and v2.prcp_adj are identical in structure.)
 
 **v2.country.codes**
 
@@ -140,7 +140,7 @@ The resulting file was then loaded into the database with the following MySQL co
 LOAD DATA INFILE '/path/to/country.load' REPLACE INTO TABLE COUNTRY;
 ```
 
-One down, two \(or three\) to go.
+One down, two (or three) to go.
 
 Just a note on the REPLACE option. Sometimes, the data files as supplied end with repeated lines. I don't know why, and I'm not too concerned with the reason that is probably buried in some Fortran code. I've used Fortran before, but in this case it doesn't really matter, since someone else pulls the data, we just want to use it. By using the REPLACE option we sidestep any errors on the repeating lines, make it so we automatically merge the two v2.prcp files, and make is so we can set up an automatic refresh with nothing more than rerunning the process. Hmmmm, love that "quick" constraint.
 
