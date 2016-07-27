@@ -4,7 +4,6 @@ To see how it works on the User Side, please go and explore the [**Demo**](http:
 
 # The Making of the gwreports Demo
 
-Published on Wed 18 May 2011
 
 After there was a working [**gwreports**](https://sourceforge.net/projects/gwreports/) module and it was nearing release to the world, the question of how to [**demonstrate it**](http://geekwright.com/modules/gwreports/) came up. It needed a substantial set of data that wasn't proprietary, confidential or otherwise encumbered. After striking out with a google search for "big gobs of data" \(hey. sometimes you get lucky,\) the idea surfaced to look for weather data. That lead rather quickly to the [**Global Historical Climatology Network data base**](http://www.ncdc.noaa.gov/ghcnm/v2.php). This was a perfect find.The data has very familiar qualities for anyone that has spent time around legacy business data locked in older technologies. The data is in fixed width text files with the instructions for interpreting it expressed in Fortran code. But, too, this is not long forgotten data. Quite the opposite, this is a current and growing collection, invaluable to ongoing climate research. The only thing more one might want is maybe a "big gobs of data" meta tag?This made for a nearly perfect fit for a system that is supposed to be a tool to make data more accessible. Hopefully, this document describing the transformation from a set of text files into the interactive reports of the [**gwreports demo**](http://geekwright.com/modules/gwreports/) will be of value as a case study for those facing similar problems in real world business situations.
 
@@ -165,9 +164,6 @@ BEGIN { FIELDWIDTHS = "11 1 4 5 5 5 5 5 5 5 5 5 5 5 5"; OFS = "\t"; ORS = "\n" }
 }
 ```
 
-* 
-* 
-
 We need to use this last bit twice, once for v2.prcp, and again for v2.prcp\_adj, and LOAD DATA in that order to capture the adjusted records.
 
 **Got data, now what?**
@@ -180,7 +176,7 @@ Populating the tables is just the first step, as the whole point of this exercis
 
 Starting with the Country list, the report SQL looks like this:
 
-```
+```sql
 SELECT s.country_code
 , c.country_name
 , count(*) as station_count
@@ -191,7 +187,7 @@ group by c.country_name, s.country_code
 order by c.country_name
 ```
 
-Add a parameter definition for _cname _as Like Text and we have a report ready to run. We can move on to the Stations by Country list:
+Add a parameter definition for \_cname \_as Like Text and we have a report ready to run. We can move on to the Stations by Country list:
 
 ```
 select station_code
@@ -293,7 +289,7 @@ The Precipitation listing has more CASE magic, and lots of repetition, but is fa
         and s.station_code = p.station_code
         order by record_year
 
-Of course we need a _scode _parameter, text, length of 11. And, just for fun, add a Station information section:
+Of course we need a \_scode \_parameter, text, length of 11. And, just for fun, add a Station information section:
 
 ```
 select station_name
@@ -318,7 +314,7 @@ The reports "work" at this point. You can look up a country code, plug that into
 <a href="report_view.php?rid=2&ccode={country_code}">{country_name}</a>
 ```
 
-OK, we really needed to look up the report id to put after the rid= part, but that really is all there is to linking the country list to the station list. Repeat that concept on the stations listing, adding this to the station\_code column: 
+OK, we really needed to look up the report id to put after the rid= part, but that really is all there is to linking the country list to the station list. Repeat that concept on the stations listing, adding this to the station\_code column:
 
 ```
 <a href="report_view.php?rid=3&scode={station_code}" title="View Station Records">{station_code}</a>
@@ -332,5 +328,5 @@ The time from setting out to find "big gobs of data" to having a system of three
 
 **Wrapping Up**
 
-Hopefully, when you put this write-up together with the [**manual**](http://geekwright.com/modules/gwreportsmanual/) and a little bit of quality experimentation time, you will be able to envision more practical uses for this power. The purpose behind [**gwreports**](https://sourceforge.net/projects/gwreports/) was to make data accessible, and we hope this [**demonstration**](http://geekwright.com/modules/gwreports/) proves success in that goal. 
+Hopefully, when you put this write-up together with the [**manual**](http://geekwright.com/modules/gwreportsmanual/) and a little bit of quality experimentation time, you will be able to envision more practical uses for this power. The purpose behind [**gwreports**](https://sourceforge.net/projects/gwreports/) was to make data accessible, and we hope this [**demonstration**](http://geekwright.com/modules/gwreports/) proves success in that goal.
 
