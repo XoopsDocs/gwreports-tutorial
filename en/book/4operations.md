@@ -83,6 +83,8 @@ One more fun trick, enter the column editor with the uid column. Set Hide this c
 
 So far we have learned that we can declare parameters and reference them within our SQL, and we can make formatting changes to columns with the column editor. To complete this example, go back and edit the report. We need to set the following:
 ```
-Is Active: 
+Is Active:  Yes 
 ```
-Yes Now go check out how the report functions from the user side. All of the editor functions are gone, and you have a report that looks, feels and functions like a part of your CMS.
+Now go check out how the report functions from the user side. All of the editor functions are gone, and you have a report that looks, feels and functions like a part of your CMS.
+
+
