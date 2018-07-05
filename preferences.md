@@ -1,6 +1,6 @@
-# 3.0 Preferences
+# Preferences
 
-![](../assets/image002.png)
+![](.gitbook/assets/image002.png)
 
 **Index Text**
 
@@ -12,7 +12,8 @@ The presence of the breadcrumb menu system could be confusing if you are intenti
 
 **Show Spreadsheet Option**
 
-The spreadsheet output option on the report viewer can be disabled here. The spreadsheet option produces an HTML table which can be directly imported into most spreadsheet programs. The primary differences in output are: 
+The spreadsheet output option on the report viewer can be disabled here. The spreadsheet option produces an HTML table which can be directly imported into most spreadsheet programs. The primary differences in output are:
+
 * No CMS output is included, just the report data tables. 
 * HTML inside report columns is stripped 
 * Sum column rows are replaced with equivalent formula definitions 

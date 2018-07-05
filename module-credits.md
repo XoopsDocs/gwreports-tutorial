@@ -1,4 +1,4 @@
-# 9.0 Module\/Tutorial Credits
+# Module Credits
 
 The Module and the Tutorial have been developed by **Richard Griffith** \(aka Geekwright\).
 
@@ -6,11 +6,9 @@ Commercial support for this module is available.
 
 For more information, visit [http:\/\/geekwright.com\/](http://geekwright.com/)
 
+![](.gitbook/assets/gw-logo-490x80.gif)
 
-![](../assets/gw-logo-490x80.gif)
-
-
-### The Geekwright Process
+## The Geekwright Process
 
 In its formation, Geekwright inherited more than two decades of software development and support experience from its founder. All of that experience, even with technologies that have come and gone, has shown us what works and what doesn't; what is safe and what is risky; what factors have the largest influence on your success. From this experience we have a unique process that we use to guarantee your success.
 
@@ -23,6 +21,4 @@ As work progresses on your plan, we will provide access to the developing soluti
 When your solution is ready for implementation, we follow a strict change management discipline. If it should ever become necessary to rebuild or restore a system we have implemented, you can be confident that all the details, the coding, and the configurations are known and ready to get you back and running as quickly as possible.
 
 At Geekwright, we take your business and your success very seriously.
-
-
 
