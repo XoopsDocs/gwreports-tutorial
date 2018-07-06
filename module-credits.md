@@ -1,10 +1,10 @@
-# Module Credits
+# 9.0 Module\/Tutorial Credits
 
-The Module and the Tutorial have been developed by **Richard Griffith** \(aka Geekwright\).
+The Module and the Tutorial have been developed by **Richard Griffith** (aka Geekwright).
 
 Commercial support for this module is available.
 
-For more information, visit [http:\/\/geekwright.com\/](http://geekwright.com/)
+For more information, visit [http://geekwright.com/](http://geekwright.com/)
 
 ![](.gitbook/assets/gw-logo-490x80.gif)
 

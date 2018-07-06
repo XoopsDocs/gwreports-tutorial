@@ -1,12 +1,11 @@
 # The User Side
 
-## 5.0 The User Side
+To see how it works on the User Side, please go and explore the [**Demo**](http://geekwright.com/modules/imblogging/post.php?post_id=11)
 
 To see how it works on the User Side, please go and explore the [**Demo**](http://geekwright.com/modules/imblogging/post.php?post_id=11)
 
-## The Making of the gwreports Demo
 
-After there was a working [**gwreports**](https://sourceforge.net/projects/gwreports/) module and it was nearing release to the world, the question of how to [**demonstrate it**](http://geekwright.com/modules/gwreports/) came up. It needed a substantial set of data that wasn't proprietary, confidential or otherwise encumbered. After striking out with a google search for "big gobs of data" \(hey. sometimes you get lucky,\) the idea surfaced to look for weather data. That lead rather quickly to the [**Global Historical Climatology Network data base**](http://www.ncdc.noaa.gov/ghcnm/v2.php). This was a perfect find.The data has very familiar qualities for anyone that has spent time around legacy business data locked in older technologies. The data is in fixed width text files with the instructions for interpreting it expressed in Fortran code. But, too, this is not long forgotten data. Quite the opposite, this is a current and growing collection, invaluable to ongoing climate research. The only thing more one might want is maybe a "big gobs of data" meta tag?This made for a nearly perfect fit for a system that is supposed to be a tool to make data more accessible. Hopefully, this document describing the transformation from a set of text files into the interactive reports of the [**gwreports demo**](http://geekwright.com/modules/gwreports/) will be of value as a case study for those facing similar problems in real world business situations.
+After there was a working **[gwreports](https://sourceforge.net/projects/gwreports/)** module and it was nearing release to the world, the question of how to **[demonstrate it](http://geekwright.com/modules/gwreports/)** came up. It needed a substantial set of data that wasn't proprietary, confidential or otherwise encumbered. After striking out with a google search for "big gobs of data" \(hey. sometimes you get lucky,\) the idea surfaced to look for weather data. That lead rather quickly to the **[Global Historical Climatology Network data base](http://www.ncdc.noaa.gov/ghcnm/v2.php)**. This was a perfect find.The data has very familiar qualities for anyone that has spent time around legacy business data locked in older technologies. The data is in fixed width text files with the instructions for interpreting it expressed in Fortran code. But, too, this is not long forgotten data. Quite the opposite, this is a current and growing collection, invaluable to ongoing climate research. The only thing more one might want is maybe a "big gobs of data" meta tag?This made for a nearly perfect fit for a system that is supposed to be a tool to make data more accessible. Hopefully, this document describing the transformation from a set of text files into the interactive reports of the **[gwreports demo](http://geekwright.com/modules/gwreports/)** will be of value as a case study for those facing similar problems in real world business situations.
 
 **A Plan**
 
@@ -22,13 +21,14 @@ OK, it was a bit loose, but it was a plan.
 
 In this plan, these were the files of interest:
 
-v2.country.codes - countries and numerical country code
+* v2.country.codes - countries and numerical country code
 
-v2.prcp.inv - meta data describing observation stations
+* v2.prcp.inv - meta data describing observation stations
 
-v2.prcp - raw precipitation data
+* v2.prcp - raw precipitation data
 
-v2.prcp\_adj - adjusted precipitation data
+* v2.prcp\_adj - adjusted precipitation data
+
 
 The v2.prcp.readme indicates the adjusted data file both eliminates some data points and adds some others. This lead to another design decision, merge these two sets for the demo.
 
@@ -43,7 +43,7 @@ For reference, here are brief snippets from the three major files. \(v2.prcp and
 156 ZIMBABWE                                
 157 AMSTERDAM ISLAND (FRANCE)               
 158 ASCENSION ISLAND (U.K.)                 
-159 CANARY ISLANDS (SPAIN)
+159 CANARY ISLANDS (SPAIN)  
 ```
 
 v2.prcp.inv
@@ -188,7 +188,7 @@ group by c.country_name, s.country_code
 order by c.country_name
 ```
 
-Add a parameter definition for \_cname \_as Like Text and we have a report ready to run. We can move on to the Stations by Country list:
+Add a parameter definition for _cname_ as Like Text and we have a report ready to run. We can move on to the Stations by Country list:
 
 ```sql
 select station_code
@@ -219,80 +219,80 @@ and c.country_code = s.country_code
 group by country_name, country_code
 ```
 
-Make that section Multirow=No, and reorder the sections to put it on top. Define a ccode parameter \(Text, length of 3\) and we've got another one down.
+Make that section Multirow=No, and reorder the sections to put it on top. Define a ccode parameter (Text, length of) and we've got another one down.
 
 The Precipitation listing has more CASE magic, and lots of repetition, but is fairly simple. We also convert the tenths of millimeters into millimeters, again for human readability:
 
 ```sql
-    select record_year
-    , CASE 
-    WHEN precip01 = -9999 THEN 'n/a' 
-    WHEN precip01 = -8888 THEN 'trace' 
-    ELSE round((precip01/10),1)
-    END as Jan
-    , CASE 
-    WHEN precip02 = -9999 THEN 'n/a' 
-    WHEN precip02 = -8888 THEN 'trace' 
-    ELSE round((precip02/10),1)
-    END as Feb
-    , CASE 
-    WHEN precip03 = -9999 THEN 'n/a' 
-    WHEN precip03 = -8888 THEN 'trace' 
-    ELSE round((precip03/10),1)
-    END as Mar
-    , CASE 
-    WHEN precip04 = -9999 THEN 'n/a' 
-    WHEN precip04 = -8888 THEN 'trace' 
-    ELSE round((precip04/10),1)
-    END as Apr
-    , CASE 
-    WHEN precip05 = -9999 THEN 'n/a' 
-    WHEN precip05 = -8888 THEN 'trace' 
-    ELSE round((precip05/10),1)
-    END as May
-    , CASE 
-    WHEN precip06 = -9999 THEN 'n/a' 
-    WHEN precip06 = -8888 THEN 'trace' 
-    ELSE round((precip06/10),1)
-    END as Jun
-    , CASE 
-    WHEN precip07 = -9999 THEN 'n/a' 
-    WHEN precip07 = -8888 THEN 'trace' 
-    ELSE round((precip07/10),1)
-    END as Jul
-    , CASE 
-    WHEN precip08 = -9999 THEN 'n/a' 
-    WHEN precip08 = -8888 THEN 'trace' 
-    ELSE round((precip08/10),1)
-    END as Aug
-    , CASE 
-    WHEN precip09 = -9999 THEN 'n/a' 
-    WHEN precip09 = -8888 THEN 'trace' 
-    ELSE round((precip09/10),1)
-    END as Sep
-    , CASE 
-    WHEN precip10 = -9999 THEN 'n/a' 
-    WHEN precip10 = -8888 THEN 'trace' 
-    ELSE round((precip10/10),1)
-    END as Oct
-    , CASE 
-    WHEN precip11 = -9999 THEN 'n/a' 
-    WHEN precip11 = -8888 THEN 'trace' 
-    ELSE round((precip11/10),1)
-    END as Nov
-    , CASE 
-    WHEN precip12 = -9999 THEN 'n/a' 
-    WHEN precip12 = -8888 THEN 'trace' 
-    ELSE round((precip12/10),1)
-    END as `Dec` 
-    , p.country_code
-    from PRECIP p, STATION s
-    where s.station_code = '{scode}'
-    and s.station_code = p.station_code
-    order by record_year
+        select record_year
+        , CASE 
+        WHEN precip01 = -9999 THEN 'n/a' 
+        WHEN precip01 = -8888 THEN 'trace' 
+        ELSE round((precip01/10),1)
+        END as Jan
+        , CASE 
+        WHEN precip02 = -9999 THEN 'n/a' 
+        WHEN precip02 = -8888 THEN 'trace' 
+        ELSE round((precip02/10),1)
+        END as Feb
+        , CASE 
+        WHEN precip03 = -9999 THEN 'n/a' 
+        WHEN precip03 = -8888 THEN 'trace' 
+        ELSE round((precip03/10),1)
+        END as Mar
+        , CASE 
+        WHEN precip04 = -9999 THEN 'n/a' 
+        WHEN precip04 = -8888 THEN 'trace' 
+        ELSE round((precip04/10),1)
+        END as Apr
+        , CASE 
+        WHEN precip05 = -9999 THEN 'n/a' 
+        WHEN precip05 = -8888 THEN 'trace' 
+        ELSE round((precip05/10),1)
+        END as May
+        , CASE 
+        WHEN precip06 = -9999 THEN 'n/a' 
+        WHEN precip06 = -8888 THEN 'trace' 
+        ELSE round((precip06/10),1)
+        END as Jun
+        , CASE 
+        WHEN precip07 = -9999 THEN 'n/a' 
+        WHEN precip07 = -8888 THEN 'trace' 
+        ELSE round((precip07/10),1)
+        END as Jul
+        , CASE 
+        WHEN precip08 = -9999 THEN 'n/a' 
+        WHEN precip08 = -8888 THEN 'trace' 
+        ELSE round((precip08/10),1)
+        END as Aug
+        , CASE 
+        WHEN precip09 = -9999 THEN 'n/a' 
+        WHEN precip09 = -8888 THEN 'trace' 
+        ELSE round((precip09/10),1)
+        END as Sep
+        , CASE 
+        WHEN precip10 = -9999 THEN 'n/a' 
+        WHEN precip10 = -8888 THEN 'trace' 
+        ELSE round((precip10/10),1)
+        END as Oct
+        , CASE 
+        WHEN precip11 = -9999 THEN 'n/a' 
+        WHEN precip11 = -8888 THEN 'trace' 
+        ELSE round((precip11/10),1)
+        END as Nov
+        , CASE 
+        WHEN precip12 = -9999 THEN 'n/a' 
+        WHEN precip12 = -8888 THEN 'trace' 
+        ELSE round((precip12/10),1)
+        END as `Dec` 
+        , p.country_code
+        from PRECIP p, STATION s
+        where s.station_code = '{scode}'
+        and s.station_code = p.station_code
+        order by record_year
 ```
 
-Of course we need a \_scode \_parameter, text, length of 11. And, just for fun, add a Station information section:
+Of course we need a scode parameter, text, length of 11. And, just for fun, add a Station information section:
 
 ```sql
 select station_name
@@ -331,5 +331,5 @@ The time from setting out to find "big gobs of data" to having a system of three
 
 **Wrapping Up**
 
-Hopefully, when you put this write-up together with the [**manual**](http://geekwright.com/modules/gwreportsmanual/) and a little bit of quality experimentation time, you will be able to envision more practical uses for this power. The purpose behind [**gwreports**](https://sourceforge.net/projects/gwreports/) was to make data accessible, and we hope this [**demonstration**](http://geekwright.com/modules/gwreports/) proves success in that goal.
+Hopefully, when you put this write-up together with the **[manual](http://geekwright.com/modules/gwreportsmanual/)** and a little bit of quality experimentation time, you will be able to envision more practical uses for this power. The purpose behind **[gwreports](https://sourceforge.net/projects/gwreports/)** was to make data accessible, and we hope this **[demonstration](http://geekwright.com/modules/gwreports/)** proves success in that goal.
 
